@@ -7,6 +7,8 @@ Esta arquitetura descreve um chatbot inteligente implantado no Azure, integrando
 
 O chatbot atua como um ponto central de contato para os produtores, oferecendo acesso a serviços financeiros, suporte agronômico, engenharia, comercial e de qualidade. A integração com a aplicação Machine Learning permite análises preditivas para auxiliar na alocação de recursos, previsão de colheitas e otimização do plantio. A plataforma Azure garante a segurança, escalabilidade e confiabilidade da solução. Em termos de Bussines Inteligence, a integração com o Azure Synapse Analytics permite a coleta e análise de dados das interações dos clientes, fornecendo insights valiosos sobre suas necessidades e preferências.
 
+![Diagrama da Arquitetura](ArquiteturaSolubioChatbot.png)
+
 ## Componentes da Arquitetura
 
 ### Camada de Interação com o Usuário
