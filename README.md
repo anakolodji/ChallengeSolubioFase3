@@ -1,53 +1,59 @@
 # Solubio - Arquitetura do Chatbot
 
-Esta arquitetura descreve um chatbot inteligente implantado no Azure, integrando o Azure Synapse Analytics para análises de negócios e relatórios de BI. A solução é projetada para ser escalável, segura e eficiente em termos de custos, utilizando serviços serverless e PaaS.
+Esta arquitetura descreve um chatbot inteligente implantado no Azure, integrando o Azure Synapse Analytics para análises de negócios e relatórios de BI. A solução, desenvolvida para a Solubio, visa revolucionar a interação com os produtores rurais que utilizam a tecnologia Onfarm, oferecendo suporte completo, automação de tarefas e insights preditivos para otimizar a produção agrícola. A arquitetura é projetada para ser escalável, segura, eficiente em termos de custos e focada na experiência do usuário.
+
 
 ### Visão Geral
 
-O chatbot interage com os usuários por meio de diversos canais, como WhatsApp, e utiliza a Maritaca IA para processamento de linguagem natural e geração de respostas.  Os dados são armazenados e processados no Azure, com pipelines de dados que alimentam um Data Lake e o Azure Synapse Analytics.  A arquitetura inclui monitoramento completo, segurança aprimorada e práticas de CI/CD para garantir a confiabilidade e agilidade.
+O chatbot atua como um ponto central de contato para os produtores, oferecendo acesso a serviços financeiros, suporte agronômico, engenharia, comercial e de qualidade. A integração com a aplicação Machine Learning permite análises preditivas para auxiliar na alocação de recursos, previsão de colheitas e otimização do plantio. A plataforma Azure garante a segurança, escalabilidade e confiabilidade da solução. Em termos de Bussines Inteligence, a integração com o Azure Synapse Analytics permite a coleta e análise de dados das interações dos clientes, fornecendo insights valiosos sobre suas necessidades e preferências.
 
 ## Componentes da Arquitetura
 
 ### Camada de Interação com o Usuário
 
-Canais de Mensagem: WhatsApp e outros.
-Azure Logic Apps/Azure Functions:  Orquestra o fluxo de mensagens entre os canais e a Maritaca IA, formatando as mensagens e gerenciando a comunicação.
-Application Insights: Monitora o desempenho e a disponibilidade das interações.
+- **Canais de Mensagem:** WhatsApp e outros.
+- **Azure Logic Apps/Azure Functions:**  Orquestra o fluxo de mensagens entre os canais e a Maritaca IA, formatando as mensagens e gerenciando a comunicação.
+- **Application Insights:** Monitora o desempenho e a disponibilidade das interações.
 
 
 ### Camada de Inteligência Artificial
 
-Maritaca IA:  Processa as mensagens dos usuários e gera respostas inteligentes.
-API Maritaca IA: Interface para interação com a Maritaca IA.
-Azure Key Vault: Armazena as chaves de API e segredos de forma segura.
-Application Insights: Monitora o desempenho e a disponibilidade da API.
+- **Maritaca IA:**  Processa as mensagens dos usuários e gera respostas inteligentes.
+- **API Maritaca IA:** Interface para interação com a Maritaca IA.
+- **Azure Key Vault:** Armazena as chaves de API e segredos de forma segura.
+- **Application Insights:** Monitora o desempenho e a disponibilidade da API.
 
 
 ### Camada de Negócios
 
-Azure Functions/Azure App Service: Implementa a lógica de negócios para diferentes serviços (Financeiro, Agronomia, Engenharia, Comercial, Qualidade).
-API de Integração com Banco de Dados:  Fornece acesso ao Azure SQL Database para operações transacionais.  Este componente pode ser revisado dependendo da sua estratégia de dados com o Data Lake e Serverless SQL Pool.
-Eventos Outbound: Gera notificações de entrega, visita e cobrança.
-Azure Notification Hubs: Gerencia o envio de notificações.
-Azure Key Vault: Armazena credenciais de acesso ao banco de dados.
-Application Insights: Monitora o desempenho e a disponibilidade dos serviços.
+- **Azure Functions/Azure App Service:** Implementa a lógica de negócios para os diferentes serviços oferecidos pela Solubio:
+Serviços Financeiros: Consulta e geração de boletos, consulta de faturamento, solicitação de NF-e, renegociação.
+Suporte Agronômico: Procedimentos de acordo com as fases da cultura, feedback sobre tratamentos, recomendações personalizadas.
+Suporte de Engenharia: Consulta de novos projetos, suporte e manutenção de equipamentos.
+Suporte Comercial: Pedido de material de apoio, portfólio de produtos, novas negociações.
+Suporte de Qualidade Onfarm: Processos de multiplicação, consultas de análises e laudos.
+
+- **API de Integração com Banco de Dados:**  Fornece acesso ao Azure SQL Database para operações transacionais.  Este componente pode ser revisado dependendo da sua estratégia de dados com o Data Lake e Serverless SQL Pool.
+- **Eventos Outbound (Azure Notification Hubs):** Envio de notificações proativas para os produtores, como lembretes de entrega, agendamento de visitas e informações sobre cobranças.
+- **Azure Key Vault:** Armazena credenciais de acesso ao banco de dados.
+- **Application Insights:**-  Monitora o desempenho e a disponibilidade dos serviços.
 
 
 ### Camada de Dados
 
-Azure Data Factory: Orquestra a extração, transformação e carregamento (ETL) de dados para o Data Lake e o Azure Synapse Analytics.
-Azure Blob Storage (Data Lake): Armazena dados brutos e processados.
-Azure Synapse Analytics (Serverless SQL Pool):  Permite consultas e análises diretamente no Data Lake, sem a necessidade de um data warehouse dedicado. Utilizado para exploração de dados e cenários com baixo/médio volume de dados.
-Azure Synapse Analytics (Dedicated SQL Pool - BI): Data warehouse dedicado para análises de negócios e relatórios de BI. Armazena dados otimizados para consultas analíticas e dashboards.
-Azure Machine Learning:  Plataforma para treinamento e implantação de modelos de machine learning.  Utiliza dados do Data Lake para treinamento.
-API de Integração com Modelo de ML:  Fornece acesso às predições do modelo de machine learning.
-Azure Key Vault: Armazena segredos relacionados ao modelo de ML.
-Application Insights: Monitora o desempenho e a disponibilidade dos pipelines de dados.
-
+- **Azure Data Factory:** Orquestra a extração, transformação e carregamento (ETL) de dados para o Data Lake e o Azure Synapse Analytics.
+- **Azure Blob Storage (Data Lake):** Armazena dados brutos e processados.
+- **Azure Synapse Analytics (Serverless SQL Pool):**  Permite consultas e análises diretamente no Data Lake, sem a necessidade de um data warehouse dedicado. Utilizado para exploração de dados e cenários com baixo/médio volume de dados.
+- **Azure Synapse Analytics (Dedicated SQL Pool - BI):** Data warehouse dedicado para análises de negócios e relatórios de BI. Armazena dados otimizados para consultas analíticas e dashboards.
+- **Azure Machine Learning:**  Plataforma para treinamento e implantação de modelos de machine learning.  Utiliza dados do Data Lake para treinamento.
+- **API de Integração com Modelo de ML:**  Interface para acesso às predições do modelo de machine learning, integrando-o com o chatbot e outros serviços.
+- **Azure Key Vault:** Armazena segredos relacionados ao modelo de ML.
+- **Application Insights:** Monitora o desempenho, a disponibilidade e a acurácia do modelo de machine learning.
+  
 
 ### Camada de Visualização
 
-Power BI (ou outra ferramenta de BI):  Conecta-se ao Azure Synapse Analytics (Dedicated SQL Pool) para criar e visualizar relatórios e dashboards interativos.
+- **Power BI (ou outra ferramenta de BI):**  Conecta-se ao Azure Synapse Analytics (Dedicated SQL Pool) para criar e visualizar relatórios e dashboards interativos.
 
 ### Fluxo de Dados
 
@@ -55,21 +61,20 @@ Os dados fluem das aplicações de negócio para o Data Lake através do Azure D
 
 ### CI/CD (Azure DevOps)
 
-Automação de Build e Deploy: Automatiza o processo de build e deploy de todos os componentes.
-Testes Automatizados: Integra testes automatizados no pipeline de CI/CD.
-Gerenciamento de Versões: Controla as diferentes versões da aplicação.
+- **Automação de Build e Deploy:** Automatiza o processo de build e deploy de todos os componentes.
+- **Testes Automatizados:** Integra testes automatizados no pipeline de CI/CD.
+- **Gerenciamento de Versões:** Controla as diferentes versões da aplicação.
 
 ### Benefícios
 
-Escalabilidade:  A arquitetura utiliza serviços serverless e PaaS, permitindo escalar os recursos conforme a demanda.
-Segurança: O Azure Key Vault protege as chaves de API, credenciais e segredos.
-Monitoramento: O Application Insights fornece monitoramento completo de todos os componentes.
-Agilidade:  A implementação de CI/CD garante agilidade no desenvolvimento e implantação.
-Insights de Negócios: O Azure Synapse Analytics permite análises avançadas e relatórios de BI para tomada de decisões estratégicas.
+- **Experiência do Produtor Aprimorada:** Acesso fácil e rápido a informações e serviços, suporte personalizado e proativo, com foco na otimização da produção.
+- **Eficiência Operacional para a Solubio:** Automação de tarefas, redução de custos operacionais, aumento da produtividade da equipe, insights de negócios para tomada de decisões estratégicas.
+- **Escalabilidade e Flexibilidade:** A arquitetura permite escalar os recursos conforme a demanda, adaptando-se ao crescimento da Solubio e às necessidades dos produtores.
+- **Previsões e Insights com Machine Learning:** Auxilia os produtores na tomada de decisões estratégicas, otimizando o plantio, prevendo colheitas e alocando recursos de forma eficiente.
+- **Segurança e Confiabilidade:** A plataforma Azure garante a segurança dos dados e a alta disponibilidade da solução.
 
-Esta documentação fornece uma visão geral da arquitetura do chatbot.  Para mais detalhes sobre cada componente, consulte a documentação específica do Azure.
-
-## Arquitetura Solubio - Estimativa de Custos
+ 
+# Arquitetura Solubio - Estimativa de Custos
 
 Calculamos esta estimativa proporcional a 1000 acessos por dia, com volume de dados de 1GB. Consideramos também a cotação do dólar a R$5,73 respectivos a data do cálculo.
 
@@ -91,8 +96,6 @@ Calculamos esta estimativa proporcional a 1000 acessos por dia, com volume de da
 
 - **Valores aproximados:**  Os valores são estimativas e podem variar dependendo do consumo real dos recursos, da configuração dos serviços e da flutuação do câmbio.
 - **Otimização:** É possível otimizar os custos ajustando os planos de serviço, implementando mecanismos de cache, monitorando o consumo de recursos e utilizando as melhores práticas para cada serviço.
-- **Calculadora de Preços do Azure:**  Recomendo utilizar a calculadora de preços do Azure (https://azure.microsoft.com/pt-br/pricing/calculator/) para obter uma estimativa mais precisa com base nas suas necessidades específicas.  A calculadora permite selecionar os serviços, configurar as opções e obter um detalhamento dos custos.
-- **Azure SQL Database:** Avalie se o Azure SQL Database ainda é necessário, considerando o uso do Data Lake e do Serverless SQL Pool.  Você pode otimizar os custos utilizando apenas o Data Lake e o Serverless SQL Pool para suas consultas.
 
 ## Resultados Esperados da Solução de Chatbot e Machine Learning para a Solubio
 
@@ -131,4 +134,4 @@ Nossa solução integrada de chatbot e machine learning visa revolucionar a expe
 
 ## Conclusão
 
-Em resumo, nossa solução de chatbot e machine learning para a Solubio oferece um conjunto de benefícios que contribuem para a melhoria da experiência do cliente, aumento da eficiência operacional e geração de valor para o negócio.  Acreditamos que esta solução representa um passo importante para a transformação digital do agronegócio, empoderando os produtores rurais com tecnologia e informação para alcançar melhores resultados.
+Em resumo, nossa solução de chatbot e machine learning para a Solubio oferece um conjunto de benefícios que contribuem para a melhoria da experiência do cliente, aumento da eficiência operacional e geração de valor para o negócio.  Acreditamos que esta solução representa um passo importante para a transformação digital do agronegócio, empoderando os produtores rurais com tecnologia e informação para alcançar juntos melhores resultados.
